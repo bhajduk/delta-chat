@@ -42,7 +42,7 @@ pipeline {
                 body: "Status: ${currentBuild.currentResult}: Job ${env.JOB_NAME}", 
                 recipientProviders: [developers()], 
                 subject: 'Test passed', 
-                to: 'bartlomiej.hajdukk@gmail.com'
+                to: 'unival12@gmail.com'
         }
 
         failure {
@@ -50,7 +50,7 @@ pipeline {
                 body: "Status: ${currentBuild.currentResult}: Job ${env.JOB_NAME}", 
                 recipientProviders: [developers()], 
                 subject: 'Test failed', 
-                to: 'bartlomiej.hajdukk@gmail.com'
+                to: 'unival12@gmail.com'
         }
     }
 }
