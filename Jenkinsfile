@@ -29,6 +29,7 @@ pipeline {
     
     post {
         success {
+        	echo 'success'
             emailext attachLog: true, 
                 body: "Status: ${currentBuild.currentResult}: Job ${env.JOB_NAME}", 
                 recipientProviders: [developers()], 
@@ -37,6 +38,7 @@ pipeline {
         }
 
         failure {
+        	echo 'failure'
             emailext attachLog: true, 
                 body: "Status: ${currentBuild.currentResult}: Job ${env.JOB_NAME}", 
                 recipientProviders: [developers()], 
