@@ -1,15 +1,10 @@
 pipeline {
-
-    agent any
-    
+    agent any  
     stages{
 
         stage('Build'){
-
             steps{
-
                 echo 'Building...'
-             
                 git branch: 'Grupa02-BH306443_Lab07', url: 'https://github.com/InzynieriaOprogramowaniaAGH/MIFT2021'
                 dir('Grupy/Grupa02/BH306443/Lab07/Docker'){
                     
@@ -18,13 +13,11 @@ pipeline {
                         chmod +x ~/docker-compose
                         ~/docker-compose up -d build-agent
                     ''' 
-
                 }
             }
         }
         
-        stage('Test') {
-            
+        stage('Test') {   
             steps{
                 echo 'Testing...'
                 dir('Grupy/Grupa02/BH306443/Lab07/Docker'){
@@ -33,10 +26,8 @@ pipeline {
             }
         }
     }
-
     
     post {
-
         success {
             emailext attachLog: true, 
                 body: "Status: ${currentBuild.currentResult}: Job ${env.JOB_NAME}", 
