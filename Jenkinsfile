@@ -20,6 +20,7 @@ pipeline {
             
             post {
                     success {
+                    	echo 'build success'
                         emailext attachLog: true, 
                             body: "Build status: ${currentBuild.currentResult}, Job: ${env.JOB_NAME}", 
                             recipientProviders: [developers()], 
@@ -28,6 +29,7 @@ pipeline {
                     }
 
                     failure {
+                    	echo 'build failure'
                         emailext attachLog: true, 
                             body: "Build status: ${currentBuild.currentResult}, Job: ${env.JOB_NAME}", 
                             recipientProviders: [developers()], 
@@ -47,6 +49,7 @@ pipeline {
             
             post {
                 success {
+                	echo 'test success'
                     emailext attachLog: true, 
                         body: "Test status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
                         recipientProviders: [developers()], 
@@ -55,6 +58,7 @@ pipeline {
                 }
 
                 failure {
+                	echo 'test failure'
                     emailext attachLog: true, 
                         body: "Test status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
                         recipientProviders: [developers()], 
@@ -67,6 +71,7 @@ pipeline {
 
     post {
         success {
+        	echo 'pipeline success'
             emailext attachLog: true, 
                 body: "Pipeline status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
                 recipientProviders: [developers()], 
@@ -75,6 +80,7 @@ pipeline {
         }
 
         failure {
+        	echo 'pipeline failure'
             emailext attachLog: true, 
                 body: "Pipeline status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
                 recipientProviders: [developers()], 
