@@ -13,7 +13,7 @@ pipeline {
                     sh '''
                         curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
                         chmod +x ~/docker-compose
-                        ~/docker-compose up -d build-agent
+                        ~/docker-compose up -d build-agenttt
                     ''' 
                 }
             }
