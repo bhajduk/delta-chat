@@ -73,7 +73,6 @@ pipeline {
                 echo 'Deploying...'
                 dir('Docker'){
                     sh 'docker tag chat:latest bhajduk/chat:latest'
-                   
                     sh 'docker save -o ./chatBuild.tar bhajduk/chat:latest' 
                     sh 'docker build -t ubuntu-deploy -f Dockerfile-ubuntu .' 
                 }
