@@ -1,9 +1,7 @@
 pipeline {
-
     agent any
     
     stages{
-
         stage('Build'){
             steps{
                 echo 'Building...'             
@@ -27,7 +25,6 @@ pipeline {
                             subject: 'Build stage passed', 
                             to: 'unival12@gmail.com'
                     }
-
                     failure {
                     	echo 'build failure'
                         emailext attachLog: true, 
@@ -56,7 +53,6 @@ pipeline {
                         subject: 'Test stage passed', 
                         to: 'unival12@gmail.com'
                 }
-
                 failure {
                 	echo 'test failure'
                     emailext attachLog: true, 
@@ -72,15 +68,15 @@ pipeline {
             steps{         
                 echo 'Deploying...'
                 dir('Docker'){
-                    sh 'docker tag chat:latest bhajduk/chat:latest'
-                    sh 'docker save -o ./chatBuild.tar bhajduk/chat:latest' 
+                    //sh 'docker tag chat:latest bhajduk/chat:latest'
+                    sh 'docker save -o ./chatBuild.tar bhajduk/myjenkins-blueocean'
+                    sh 'docker save -o ./chatBuild.tar bhajduk/myjenkins-blueocean:1.1'
                     sh 'docker build -t ubuntu-deploy -f Dockerfile-ubuntu .' 
                 }
             }
             
             post {
                 success {
-                
                 	echo 'deploy success'
                     emailext attachLog: true, 
                         body: "Deploy status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
@@ -88,7 +84,6 @@ pipeline {
                         subject: 'Test stage passed', 
                         to: 'unival12@gmail.com'
                 }
-
                 failure {
                 	echo 'deploy failure'
                     emailext attachLog: true, 
@@ -100,7 +95,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
         	echo 'pipeline success'
@@ -110,7 +104,6 @@ pipeline {
                 subject: 'Whole pipeline passed', 
                 to: 'unival12@gmail.com'
         }
-
         failure {
         	echo 'pipeline failure'
             emailext attachLog: true, 
