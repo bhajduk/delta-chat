@@ -117,6 +117,7 @@ pipeline {
                 recipientProviders: [developers()], 
                 subject: 'Whole pipeline failed', 
                 to: 'unival12@gmail.com'
+                
         }
     }
 }
