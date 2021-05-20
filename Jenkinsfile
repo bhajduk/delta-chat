@@ -80,6 +80,7 @@ pipeline {
             
             post {
                 success {
+                
                 	echo 'deploy success'
                     emailext attachLog: true, 
                         body: "Deploy status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
