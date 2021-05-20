@@ -67,6 +67,37 @@ pipeline {
                 }
             }
         }
+        
+        stage('Deploy') {      
+            steps{         
+                echo 'Deploying...'
+                dir('Docker'){
+                    sh 'docker tag chat:latest bhajduk/chat:latest'
+                    sh 'docker save -o ./chatBuild.tar bhajduk/chat:latest'
+                    sh 'docker build -t ubuntu-deploy -f Dockerfile-ubuntu .' 
+                }
+            }
+            
+            post {
+                success {
+                	echo 'deploy success'
+                    emailext attachLog: true, 
+                        body: "Deploy status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
+                        recipientProviders: [developers()], 
+                        subject: 'Test stage passed', 
+                        to: 'unival12@gmail.com'
+                }
+
+                failure {
+                	echo 'deploy failure'
+                    emailext attachLog: true, 
+                        body: "Deploy status: ${currentBuild.currentResult}, Job ${env.JOB_NAME}", 
+                        recipientProviders: [developers()], 
+                        subject: 'Test stage failed', 
+                        to: 'unival12@gmail.com'
+                }
+            }
+        }
     }
 
     post {
