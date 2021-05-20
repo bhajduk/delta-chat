@@ -73,7 +73,7 @@ pipeline {
                 echo 'Deploying...'
                 dir('Docker'){
                     //sh 'docker tag chat:latest bhajduk/chat:latest'
-                    sh 'docker save -o ./chatBuild.tar bhajduk/myjenkins-blueocean'
+                    sh 'docker save -o ./chatBuild.tar bhajduk/myjenkins-blueocean:1.1'
                     sh 'docker build -t ubuntu-deploy -f Dockerfile-ubuntu .' 
                 }
             }
